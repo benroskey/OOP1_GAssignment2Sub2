@@ -1,6 +1,8 @@
-package utilities;
+package adt;
 
 import java.io.Serializable;
+
+import utility.Iterator;
 
 /**
  * <p>

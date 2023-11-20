@@ -1,13 +1,14 @@
-package resources;
+package utility;
 
-import utilities.Iterator;
-import utilities.ListADT;
+import java.util.NoSuchElementException;
 
-public class MyArrayList implements ListADT {
-    private Object[] data;
+import adt.ListADT;
+
+public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
+    private E[] data;
 
     public MyArrayList() {
-        data = new Object[0];
+        this.data = (E[]) new Object[0];;
     }
 
     @Override
@@ -41,28 +42,23 @@ public class MyArrayList implements ListADT {
     }
 
     @Override
-    public Object get(int index) throws IndexOutOfBoundsException {
-        if (index < 0 || index >= this.size()) {
-            throw new IndexOutOfBoundsException();
-        }
+    public E get(int index) throws IndexOutOfBoundsException {
         for (int i = 0; i < this.size(); i++) {
             if (i == index) {
-                return this.data[i];
+                E temp = (E) this.data[i];
+                return temp;
             }
         }
-        return null;
+        throw new IndexOutOfBoundsException();
     }
 
     @Override
-    public Object remove(int index) throws IndexOutOfBoundsException {
-        if (index < 0 || index >= this.size()) {
-            throw new IndexOutOfBoundsException();
-        }
+    public E remove(int index) throws IndexOutOfBoundsException {
         for (int i = 0; i < this.size(); i++) {
             if (i == index) {
-                Object temp = this.data[i];
+                E temp = this.data[i];
 
-                Object[] newList = new Object[this.size() - 1];
+                E[] newList = (E[]) new Object[this.size() - 1];
                 for (int j = 0; j < this.size(); j++) {
                     if (j == i) {
                         continue;
@@ -74,16 +70,16 @@ public class MyArrayList implements ListADT {
                 return temp;
             }
         }
-        return index;
+        throw new IndexOutOfBoundsException();
     }
 
     @Override
-    public Object remove(Object toRemove) throws NullPointerException {
+    public E remove(E toRemove) throws NullPointerException {
         for (int i = 0; i < this.size(); i++) {
             if (this.data == toRemove) {
-                Object temp = this.data[i];
+                E temp = (E) this.data[i];
 
-                Object[] newList = new Object[this.size() - 1];
+                E[] newList = (E[]) new Object[this.size() - 1];
                 for (int j = 0; j < this.size(); j++) {
                     if (j == i) {
                         continue;
@@ -99,7 +95,7 @@ public class MyArrayList implements ListADT {
     }
 
     @Override
-    public Object set(int index, Object toChange) throws NullPointerException, IndexOutOfBoundsException {
+    public E set(int index, Object toChange) throws NullPointerException, IndexOutOfBoundsException {
         if (index < 0 || index >= this.size()) {
             throw new IndexOutOfBoundsException();
         }
@@ -108,13 +104,13 @@ public class MyArrayList implements ListADT {
                 if (this.data[i] == null) {
                     throw new NullPointerException();
                 }
-
-                Object temp = this.data[i];
-                this.data[i] = toChange;
+                
+                E temp = (E) this.data[i];
+                this.data[i] = (E) toChange;
                 return temp;
             }
         }
-        thor
+        throw new IndexOutOfBoundsException();
     }
 
     @Override
@@ -145,8 +141,20 @@ public class MyArrayList implements ListADT {
     }
 
     @Override
-    public Iterator iterator() {
+    public Iterator<E> iterator() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+    }
+
+    @Override
+    public boolean hasNext() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'hasNext'");
+    }
+
+    @Override
+    public E next() throws NoSuchElementException {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'next'");
     }
 }

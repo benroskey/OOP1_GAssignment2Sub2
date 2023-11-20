@@ -1,7 +1,9 @@
-package utilities;
+package adt;
 
 import java.io.*;
 import java.util.NoSuchElementException;
+
+import utility.Iterator;
 
 /**
  * This is the professional Queue Interface for Object-Oriented
