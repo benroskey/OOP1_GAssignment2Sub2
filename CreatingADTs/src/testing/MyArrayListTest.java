@@ -1,7 +1,8 @@
 import java.beans.Transient;
 
 import org.junit.Test;
-import adt.Iterator;
+
+import utilities.Iterator;
 
 public class MyArrayListTest {
     @Test
