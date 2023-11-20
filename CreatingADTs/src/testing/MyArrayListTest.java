@@ -77,7 +77,7 @@ public class MyArrayListTest {
 
     @Test
     public void testRemove() {
-        MyArrayList<Integer> list = new MyArrayList<Integer>();
+        MyArrayList<Character> list = new MyArrayList<Character>();
         list.add('a');
         list.add('b');
         list.add('c');
@@ -88,7 +88,7 @@ public class MyArrayListTest {
 
     @Test
     public void testRemoveIndex() {
-        MyArrayList<Integer> list = new MyArrayList<Integer>();
+        MyArrayList<Character> list = new MyArrayList<Character>();
         list.add('a');
         list.add('b');
         list.add('c');

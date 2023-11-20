@@ -8,7 +8,7 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
     private E[] data;
 
     public MyArrayList() {
-        this.data = (E[]) new Object[0];;
+        this.data = (E[]) new Object[0];
     }
 
     @Override
@@ -36,7 +36,7 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
     }
 
     @Override
-    public boolean addAll(ListADT toAdd) throws NullPointerException {
+    public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addAll'");
     }
