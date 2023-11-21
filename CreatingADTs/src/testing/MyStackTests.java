@@ -56,7 +56,7 @@ public class MyStackTests {
         MyStack<Integer> stack = new MyStack<Integer>();
         stack.push(1);
         stack.push(2);
-        Integer[] array = stack.toArray();
+        Integer[] array = (Integer[]) stack.toArray();
         assert(2 == array.length);
         assert(2 == array[0]);
         assert(1 == array[1]);

@@ -6,7 +6,7 @@ import org.junit.Test;
 import adt.Iterator;
 import utility.MyArrayList;
 
-public class MyArrayListTest {
+public class MyArrayListTests {
     @Test
     public void testSize() {
         MyArrayList<Integer> list = new MyArrayList<Integer>();
