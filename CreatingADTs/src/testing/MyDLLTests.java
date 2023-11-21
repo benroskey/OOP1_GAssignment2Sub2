@@ -3,7 +3,7 @@ package testing;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import utility.Iterator;
+import adt.Iterator;
 import utility.MyDLL;
 
 public class MyDLLTests {

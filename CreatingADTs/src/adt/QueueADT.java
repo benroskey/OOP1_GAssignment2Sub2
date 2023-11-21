@@ -3,8 +3,6 @@ package adt;
 import java.io.*;
 import java.util.NoSuchElementException;
 
-import utility.Iterator;
-
 /**
  * This is the professional Queue Interface for Object-Oriented
  * Programming 3 (CRPG 304) at the SAIT Polytechnic.

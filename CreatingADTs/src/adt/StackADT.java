@@ -1,9 +1,6 @@
 package adt;
 
 import java.util.*;
-
-import utility.Iterator;
-
 import java.io.*;
 
 /**

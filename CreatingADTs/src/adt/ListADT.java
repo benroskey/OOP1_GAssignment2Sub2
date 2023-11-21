@@ -2,8 +2,6 @@ package adt;
 
 import java.io.Serializable;
 
-import utility.Iterator;
-
 /**
  * <p>
  * The <code>ListADT</code> interface is designed to be used as a basis for all
