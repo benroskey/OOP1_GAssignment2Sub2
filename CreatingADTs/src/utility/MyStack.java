@@ -17,27 +17,36 @@ public class MyStack<E> implements StackADT<E>, Iterator<E> {
      */
     public MyStack() {
         this.list = new MyArrayList<E>();
-    }
+        
     @Override
     public void push(E toAdd) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'push'");
+        if (toAdd == null) {
+            throw new NullPointerException("Cannot push null element to stack");
+        }
+        list.add(toAdd);
     }
+
     @Override
     public E pop() throws EmptyStackException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pop'");
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return list.remove(list.size() - 1);
     }
+
     @Override
     public E peek() throws EmptyStackException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peek'");
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return list.get(list.size() - 1);
     }
+
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clear'");
+        list.clear();
     }
+    
     @Override
     public boolean isEmpty() {
         // Checks if the stack is empty. Returns true if the stack has no elements,
