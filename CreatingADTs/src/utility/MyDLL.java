@@ -237,25 +237,70 @@ public class MyDLL<E> implements ListADT<E>, Iterator<E> {
 
     @Override
     public boolean contains(E toFind) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'contains'");
+        if (toFind == null) {
+            throw new NullPointerException();
+        }
+        for (MyDLLNode<E> curr = this.head; curr != null; curr = curr.getNext()) {
+            if (curr.getElement().equals(toFind)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public E[] toArray(E[] toHold) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+        if (toHold == null) {
+            throw new NullPointerException();
+        }
+        if (toHold.length < this.size()) {
+            toHold = (E[]) new Object[this.size()];
+        }
+        int count = 0;
+        for (MyDLLNode<E> curr = this.head; curr != null; curr = curr.getNext()) {
+            toHold[count] = curr.getElement();
+            count++;
+        }
+        return toHold;
     }
 
     @Override
     public Object[] toArray() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+        Object[] temp = new Object[this.size()];
+        int count = 0;
+        for (MyDLLNode<E> curr = this.head; curr != null; curr = curr.getNext()) {
+            temp[count] = curr.getElement();
+            count++;
+        }
+        return temp;
     }
 
     @Override
     public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+        return new Iterator<E>() {
+            private MyDLLNode<E> curr = head;
+
+            @Override
+            public boolean hasNext() {
+                if (curr != null) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            @Override
+            public E next() throws NoSuchElementException {
+                if (this.hasNext()) {
+                    E temp = curr.getElement();
+                    curr = curr.getNext();
+                    return temp;
+                }
+                else
+                {
+                    throw new NoSuchElementException();
+                }
+            }
+        };
     }
 }
