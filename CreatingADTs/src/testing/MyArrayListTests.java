@@ -1,6 +1,7 @@
 package testing;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 import adt.Iterator;
@@ -40,7 +41,7 @@ public class MyArrayListTests {
         MyArrayList<Integer> list = new MyArrayList<Integer>();
         list.add(0, 1);
         list.add(1, 2);
-        list.add(1, 3);
+        list.add(2, 3);
         assert(1 == list.get(0));
         assert(2 == list.get(1));
         assert(3 == list.get(2));
@@ -77,13 +78,13 @@ public class MyArrayListTests {
 
     @Test
     public void testRemove() {
-        MyArrayList<Character> list = new MyArrayList<Character>();
-        list.add('a');
-        list.add('b');
-        list.add('c');
-        list.remove('b');
-        assert(1 == list.get(0));
-        assert(2 == list.get(1));
+        MyArrayList<String> list = new MyArrayList<String>();
+        list.add("foo");
+        list.add("peepoo");
+        list.add("bar");
+        list.remove("peepoo");
+        assertTrue("foo" == list.get(0));
+        assertTrue("bar" == list.get(1));
     }
 
     @Test
@@ -93,9 +94,10 @@ public class MyArrayListTests {
         list.add('b');
         list.add('c');
         list.remove(1);
-        assert(1 == list.get(0));
-        assert(2 == list.get(1));
+        assertTrue('a' == list.get(0));
+        assertTrue('c' == list.get(1));
     }
+
 
     @Test
     public void testSet() {
@@ -104,9 +106,9 @@ public class MyArrayListTests {
         list.add('b');
         list.add('c');
         list.set(1, 'd');
-        assert(1 == list.get(0));
-        assert(2 == list.get(1));
-        assert(3 == list.get(2));
+        assertTrue('a' == list.get(0));
+        assertTrue('d' == list.get(1));
+        assertTrue('c' == list.get(2));
     }
 
     @Test

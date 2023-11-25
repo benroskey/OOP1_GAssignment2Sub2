@@ -32,6 +32,8 @@ public class MyStack<E> implements StackADT<E>, Iterator<E> {
         if (isEmpty()) {
             throw new EmptyStackException();
         }
+        E var = list.get(list.size() - 1);
+        System.out.println(var);
         return list.remove(list.size() - 1);
     }
 

@@ -41,7 +41,7 @@ public class MyDLLTests {
         MyDLL<Integer> list = new MyDLL<Integer>();
         list.add(0, 1);
         list.add(1, 2);
-        list.add(1, 3);
+        list.add(2, 3);
         assert(1 == list.get(0));
         assert(2 == list.get(1));
         assert(3 == list.get(2));
@@ -78,13 +78,13 @@ public class MyDLLTests {
 
     @Test
     public void testRemove() {
-        MyDLL<Character> list = new MyDLL<Character>();
-        list.add('a');
-        list.add('b');
-        list.add('c');
-        list.remove('b');
-        assert(1 == list.get(0));
-        assert(2 == list.get(1));
+        MyDLL<String> list = new MyDLL<String>();
+        list.add("foo");
+        list.add("peepoo");
+        list.add("bar");
+        list.remove(1);
+        assert("foo" == list.get(0));
+        assert("bar" == list.get(1));
     }
 
     @Test
@@ -94,8 +94,8 @@ public class MyDLLTests {
         list.add('b');
         list.add('c');
         list.remove(1);
-        assert(1 == list.get(0));
-        assert(2 == list.get(1));
+        assertTrue('a' == list.get(0));
+        assertTrue('c' == list.get(1));
     }
 
     @Test
@@ -105,9 +105,9 @@ public class MyDLLTests {
         list.add('b');
         list.add('c');
         list.set(1, 'd');
-        assert(1 == list.get(0));
-        assert(2 == list.get(1));
-        assert(3 == list.get(2));
+        assertTrue('a' == list.get(0));
+        assertTrue('d' == list.get(1));
+        assertTrue('c' == list.get(2));
     }
 
     @Test

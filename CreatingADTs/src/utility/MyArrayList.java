@@ -99,33 +99,27 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
     
     
     @Override
-    @SuppressWarnings("unchecked")
-    public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
-        // Throws NullPointerException if the provided list is null.
-        if (toAdd == null) {
-            throw new NullPointerException("Cannot add null list");
-        }
-    
-        // Create a new array with size equal to the sum of the current size and the size of the provided list.
-        E[] newData = (E[]) new Object[this.size() + toAdd.size()];
-    
-        // Copy all elements from the current array to the new array.
-        System.arraycopy(this.data, 0, newData, 0, this.size());
-    
-        // Iterator to iterate over elements of the provided list.
-        Iterator<? extends E> it = toAdd.iterator();
-    
-        // Copy elements from the provided list to the new array.
-        int i = this.size(); // Start copying at the end of the existing elements.
-        while (it.hasNext()) {
-            newData[i++] = it.next();
-        }
-    
-        // Update the data array reference to the new array.
-        this.data = newData;
-    
-        return true;
+@SuppressWarnings("unchecked")
+public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
+   // Throws NullPointerException if the provided list is null.
+    if (toAdd == null) {
+        throw new NullPointerException("Cannot add null list");
     }
+    
+    // Create a new array with size equal to the sum of the current size and the size of the provided list.
+    E[] newData = (E[]) new Object[this.size() + toAdd.size()];
+    
+    // Copy all elements from the current array to the new array.
+    System.arraycopy(this.data, 0, newData, 0, this.size());
+    
+    // Copy elements from the provided list to the new array.
+    System.arraycopy(toAdd.toArray(), 0, newData, this.size(), toAdd.size());
+    
+    // Update the data array reference to the new array.
+    this.data = newData;
+    
+    return true;
+}
     
     
 
@@ -151,38 +145,6 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
     }
 
     /**
-     * Removes the element at the specified position in this list.
-     * 
-     * @param index the index of the element to be removed.
-     * @return E the element previously at the specified position.
-     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size()).
-     * @precondition The list is not empty and the index is in the list.
-     * @postcondition The element is removed from the list and the size is decreased by 1.
-     * @complexity O(n)
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public E remove(int index) throws IndexOutOfBoundsException {
-        for (int i = 0; i < this.size(); i++) {
-            if (i == index) {
-                E temp = this.data[i];
-
-                E[] newList = (E[]) new Object[this.size() - 1];
-                for (int j = 0; j < this.size(); j++) {
-                    if (j == i) {
-                        continue;
-                    }
-                    newList[j] = this.data[j];
-                }
-                this.data = newList;
-
-                return temp;
-            }
-        }
-        throw new IndexOutOfBoundsException();
-    }
-
-    /**
      * Removes the first occurrence of the specified element from this list, if it is present.
      * 
      * @param toRemove element to be removed from this list, if present.
@@ -195,23 +157,68 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
     @Override
     @SuppressWarnings("unchecked")
     public E remove(E toRemove) throws NullPointerException {
+        if (toRemove == null) {
+            throw new NullPointerException();
+        }
+        E temp = (E) this.data[0];
         for (int i = 0; i < this.size(); i++) {
-            if (this.data == toRemove) {
-                E temp = (E) this.data[i];
+            if (this.data[i] == toRemove) {
+                temp = (E) this.data[i];
 
-                E[] newList = (E[]) new Object[this.size() - 1];
+                E[] newList = (E[]) new Object[this.size()];
+                int count = 0;
                 for (int j = 0; j < this.size(); j++) {
                     if (j == i) {
                         continue;
                     }
-                    newList[j] = this.data[j];
+                    newList[count] = this.data[j];
+                    count++;
                 }
                 this.data = newList;
 
                 return temp;
             }
         }
-        throw new NullPointerException();
+        return temp;
+    }
+
+    /**
+     * Removes the element at the specified position in this list.
+     * 
+     * @param index the index of the element to be removed.
+     * @return E the element previously at the specified position.
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size()).
+     * @precondition The list is not empty and the index is in the list.
+     * @postcondition The element is removed from the list and the size is decreased by 1.
+     * @complexity O(n)
+     */
+    @Override
+    @SuppressWarnings("unchecked")
+    public E remove(int index) throws IndexOutOfBoundsException {
+        E temp = (E) this.data[index];
+        if (index < 0 || index >= this.size()) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        for (int i = 0; i < this.size(); i++) {
+            if (i == index) {
+                temp = this.data[i];
+
+                E[] newList = (E[]) new Object[this.size()];
+                int count = 0;
+                for (int j = 0; j < this.size(); j++) {
+                    if (j == i) {
+                        continue;
+                    }
+                    newList[count] = this.data[j];
+                    count++;
+                }
+                this.data = newList;
+
+                return temp;
+            }
+        }
+        return temp;
     }
 
     /**
@@ -302,24 +309,21 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            private E curr = data[0];
+            private int curr = 0;
 
             @Override
             public boolean hasNext() {
-                if (curr != null) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return curr < data.length;
             }
-
             @Override
             public E next() throws NoSuchElementException {
                 if (this.hasNext()) {
-                    E temp = curr;
-                    curr = data[1];
+                    E temp = data[curr];
+                    curr++;
                     return temp;
-                } else {
+                }
+                else
+                {
                     throw new NoSuchElementException();
                 }
             }

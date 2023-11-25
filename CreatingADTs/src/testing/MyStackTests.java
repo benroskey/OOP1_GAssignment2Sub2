@@ -18,11 +18,11 @@ public class MyStackTests {
 
     @Test
     public void testPop() {
-        MyStack<Integer> stack = new MyStack<Integer>();
-        stack.push(1);
-        stack.push(2);
-        assert(2 == stack.pop());
-        assert(1 == stack.pop());
+        MyStack<String> stack = new MyStack<String>();
+        stack.push("foo");
+        stack.push("bar");
+        assert("bar".equals(stack.pop()));
+        assert("foo".equals(stack.pop()));
     }
 
     @Test
