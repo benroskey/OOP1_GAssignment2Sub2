@@ -17,6 +17,7 @@ public class MyStack<E> implements StackADT<E>, Iterator<E> {
      */
     public MyStack() {
         this.list = new MyArrayList<E>();
+    }
         
     @Override
     public void push(E toAdd) throws NullPointerException {

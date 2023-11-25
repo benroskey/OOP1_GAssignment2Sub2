@@ -99,7 +99,7 @@ public class MyArrayListTests {
 
     @Test
     public void testSet() {
-        MyArrayList<Integer> list = new MyArrayList<Integer>();
+        MyArrayList<Character> list = new MyArrayList<Character>();
         list.add('a');
         list.add('b');
         list.add('c');
