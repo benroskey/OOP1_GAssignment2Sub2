@@ -265,38 +265,82 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
 
     @Override
     public boolean contains(Object toFind) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'contains'");
+        if (toFind == null) {
+            throw new NullPointerException();
+        }
+        for (int i = 0; i < this.size(); i++) {
+            if (this.data[i] == toFind) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public E[] toArray(Object[] toHold) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+        if (toHold == null) {
+            throw new NullPointerException();
+        }
+        if (toHold.length < this.size()) {
+            toHold = (E[]) new Object[this.size()];
+        }
+        for (int i = 0; i < this.size(); i++) {
+            toHold[i] = this.data[i];
+        }
+        return (E[]) toHold;
     }
 
     @Override
     public Object[] toArray() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+        Object[] temp = new Object[this.size()];
+        for (int i = 0; i < this.size(); i++) {
+            temp[i] = this.data[i];
+        }
+        return temp;
     }
 
     @Override
     public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+        return new Iterator<E>() {
+            private E curr = data[0];
+
+            @Override
+            public boolean hasNext() {
+                if (curr != null) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            @Override
+            public E next() throws NoSuchElementException {
+                if (this.hasNext()) {
+                    E temp = curr;
+                    curr = data[1];
+                    return temp;
+                } else {
+                    throw new NoSuchElementException();
+                }
+            }
+        };
     }
 
     @Override
     public boolean hasNext() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hasNext'");
+        if (this.data[0] != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
     public E next() throws NoSuchElementException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'next'");
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+        return this.data[0];
     }
 
     public int indexOf(E toFind) {
