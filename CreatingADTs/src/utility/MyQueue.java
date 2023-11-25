@@ -142,29 +142,22 @@ public class MyQueue<E> implements QueueADT<E>, Iterator<E> {
         return true;
     }
     
-    
     @Override
     public Object[] toArray() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+        return this.list.toArray();
     }
 
     @Override
-    public E[] toArray(E[] holder) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
-    }
-
-    @Override
-    public boolean isFull() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isFull'");
+    public E[] toArray(E[] holder) throws NullPointerException{
+        if (holder == null) {
+            throw new NullPointerException();
+        }
+        return this.list.toArray(holder);
     }
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+        return this.list.size();
     }
 
     @Override
