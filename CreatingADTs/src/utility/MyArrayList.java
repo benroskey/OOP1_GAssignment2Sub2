@@ -158,4 +158,8 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'next'");
     }
+
+    public int indexOf(E toFind) {
+        return 0;
+    }
 }

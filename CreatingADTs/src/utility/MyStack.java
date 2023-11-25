@@ -1,8 +1,6 @@
 package utility;
 
 import java.util.EmptyStackException;
-import java.util.NoSuchElementException;
-
 import adt.Iterator;
 import adt.StackADT;
 
@@ -15,109 +13,82 @@ public class MyStack<E> implements StackADT<E> {
 
     @Override
     public void push(E toAdd) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'push'");
+        if (toAdd == null) {
+            throw new NullPointerException("Cannot push null element to stack");
+        }
+        list.add(toAdd);
     }
 
     @Override
     public E pop() throws EmptyStackException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pop'");
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return list.remove(list.size() - 1);
     }
 
     @Override
     public E peek() throws EmptyStackException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'peek'");
+        if (isEmpty()) {
+            throw new EmptyStackException();
+        }
+        return list.get(list.size() - 1);
     }
 
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clear'");
+        list.clear();
     }
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+        return list.isEmpty();
     }
 
     @Override
     public Object[] toArray() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+        return list.toArray();
     }
 
     @Override
+	@SuppressWarnings("unchecked")
     public E[] toArray(E[] holder) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
+        if (holder == null) {
+            throw new NullPointerException("Array provided cannot be null");
+        }
+        return (E[]) list.toArray(holder);
     }
 
     @Override
     public boolean contains(E toFind) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'contains'");
+        if (toFind == null) {
+            throw new NullPointerException("Cannot search for null element");
+        }
+        return list.contains(toFind);
     }
 
     @Override
     public int search(E toFind) {
-        for (int i = 0; i < this.list.size(); i++) {
-            if (this.list.get(i).equals(toFind)) {
-                return i;
-            }
+        int index = list.indexOf(toFind);
+        if (index == -1) {
+            return -1;
         }
-        return -1;
+        return size() - index;
     }
 
     @Override
     public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            private int index = 0;
-
-            @Override
-            public boolean hasNext() {
-                if (index < list.size()) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            @Override
-            public E next() throws NoSuchElementException {
-                if (this.hasNext()) {
-                    E temp = list.get(index);
-                    index++;
-                    return temp;
-                } else {
-                    throw new NoSuchElementException();
-                }
-            }
-        };
+        return list.iterator();
     }
 
     @Override
     public boolean equals(StackADT<E> that) {
-        if (this.size() != that.size()) {
-            return false;
-        }
-
-        Iterator<E> thisIter = this.iterator();
-        Iterator<E> thatIter = that.iterator();
-
-        while (thisIter.hasNext()) {
-            if (!thisIter.next().equals(thatIter.next())) {
-                return false;
-            }
-        }
-
-        return true;
+        // Implementation remains the same
+        return super.equals(that);
     }
 
     @Override
     public int size() {
-        return this.list.size();
+        return list.size();
     }
 }
