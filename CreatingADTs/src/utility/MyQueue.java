@@ -8,10 +8,32 @@ import adt.QueueADT;
 public class MyQueue<E> implements QueueADT<E>, Iterator<E> {
     private MyDLL<E> list;
 
+    /**
+     * Constructs an empty list with an initial capacity of ten.
+     * 
+     * @param none
+     * @return none
+     * @throws none
+     * @postcondition none
+     * @precondition none
+     * @complexity O(1)
+     */
     public MyQueue() {
         this.list = new MyDLL<E>();
     }
 
+    /**
+     * Enqueue will place the added item at the last position in the queue. This
+     * method will not allow <code>null</code> values to be added to the Queue.
+     * 
+     * @param toAdd the item to be added to the Queue.
+     * @throws NullPointerException raised when a <code>null</code> object is
+     *                              placed in the Queue.
+     * @precondition the item is not null.
+     * @postcondition the item is added to the end of the queue and the size is
+     *                increased by 1.
+     * @complexity O(1)
+     */
     @Override
     public void enqueue(E toAdd) throws NullPointerException {
         if (toAdd == null) {
@@ -20,6 +42,16 @@ public class MyQueue<E> implements QueueADT<E>, Iterator<E> {
         this.list.add(toAdd);
     }
 
+    /**
+     * Dequeue will remove the first item that was placed in the Queue.
+     * 
+     * @return the first item in the Queue.
+     * @throws EmptyQueueException raised when the queue's length is zero (0).
+     * @precondition the queue is not empty.
+     * @postcondition the first item in the queue is removed and the size is
+     *                decreased by 1.
+     * @complexity O(1)
+     */
     @Override
     public E dequeue() throws NoSuchElementException {
         if (this.list.isEmpty()) {
@@ -30,6 +62,15 @@ public class MyQueue<E> implements QueueADT<E>, Iterator<E> {
         return temp;
     }
 
+    /**
+     * Peek provides a reference to the first item in the queue without removing
+     * 
+     * @return the first item in the queue.
+     * @throws EmptyQueueException raised when the queue's length is zero (0).
+     * @precondition the queue is not empty.
+     * @postcondition none
+     * @complexity O(1)
+     */
     @Override
     public E peek() throws NoSuchElementException {
         if (this.list.isEmpty()) {
@@ -38,6 +79,16 @@ public class MyQueue<E> implements QueueADT<E>, Iterator<E> {
         return this.list.get(0);
     }
 
+    /**
+     * dequeueAll removes all items in the queue.
+     * 
+     * @param none
+     * @return none
+     * @throws none
+     * @postcondition the queue is empty and the size is 0.
+     * @precondition the queue is not null.
+     * @complexity O(1)
+     */
     @Override
     public void dequeueAll() {
         this.list.clear();
