@@ -25,33 +25,109 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
-    }
-
-    @Override
-    public void clear() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clear'");
-    }
-
-    @Override
-    public boolean add(int index, Object toAdd) throws NullPointerException, IndexOutOfBoundsException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
-    }
-
-    @Override
-    public boolean add(Object toAdd) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        // Returns the length of the data array, which represents the number of elements in the list.
+        return this.data.length;
     }
     
+    
+
     @Override
-    public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addAll'");
+    @SuppressWarnings("unchecked")
+    public void clear() {
+        // Clears the list by assigning a new empty array to 'data'.
+        this.data = (E[]) new Object[0];
     }
+    
+    
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
+        // Throws NullPointerException if the object to be added is null.
+        if (toAdd == null) {
+            throw new NullPointerException("Cannot add null to the list");
+        }
+    
+        // Throws IndexOutOfBoundsException if the index is out of the valid range.
+        if (index < 0 || index > this.size()) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + this.size());
+        }
+    
+        // Create a new array with size one greater than the current array to accommodate the new element.
+        E[] newData = (E[]) new Object[this.size() + 1];
+    
+        // Copy elements from the old array to the new array, up to the specified index.
+        System.arraycopy(this.data, 0, newData, 0, index);
+    
+        // Insert the new element at the specified index.
+        newData[index] = toAdd;
+    
+        // Copy the remaining elements from the old array to the new array, after the inserted element.
+        System.arraycopy(this.data, index, newData, index + 1, this.size() - index);
+    
+        // Update the data array reference to the new array.
+        this.data = newData;
+    
+        return true;
+    }
+    
+    
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public boolean add(E toAdd) throws NullPointerException {
+        // Throws NullPointerException if the object to be added is null.
+        if (toAdd == null) {
+            throw new NullPointerException("Cannot add null to the list");
+        }
+    
+        // Create a new array with size one greater than the current array to accommodate the new element.
+        E[] newData = (E[]) new Object[this.size() + 1];
+    
+        // Copy all elements from the old array to the new array.
+        System.arraycopy(this.data, 0, newData, 0, this.size());
+    
+        // Add the new element to the end of the new array.
+        newData[this.size()] = toAdd;
+    
+        // Update the data array reference to the new array.
+        this.data = newData;
+    
+        return true;
+    }
+    
+    
+    
+    @Override
+    @SuppressWarnings("unchecked")
+    public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
+        // Throws NullPointerException if the provided list is null.
+        if (toAdd == null) {
+            throw new NullPointerException("Cannot add null list");
+        }
+    
+        // Create a new array with size equal to the sum of the current size and the size of the provided list.
+        E[] newData = (E[]) new Object[this.size() + toAdd.size()];
+    
+        // Copy all elements from the current array to the new array.
+        System.arraycopy(this.data, 0, newData, 0, this.size());
+    
+        // Iterator to iterate over elements of the provided list.
+        Iterator<? extends E> it = toAdd.iterator();
+    
+        // Copy elements from the provided list to the new array.
+        int i = this.size(); // Start copying at the end of the existing elements.
+        while (it.hasNext()) {
+            newData[i++] = it.next();
+        }
+    
+        // Update the data array reference to the new array.
+        this.data = newData;
+    
+        return true;
+    }
+    
+    
 
     /**
      * Returns the element at the specified position in this list.

@@ -96,22 +96,53 @@ public class MyQueue<E> implements QueueADT<E>, Iterator<E> {
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isEmpty'");
+        // Checks if the queue is empty. Returns true if the queue has no elements,
+        // which is determined by checking if the underlying list is empty.
+        return this.list.isEmpty();
     }
-
+    
     @Override
     public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
+        // Returns an iterator for the queue. This iterator will iterate over the elements
+        // in the queue in the order they were added. The implementation delegates the iterator
+        // creation to the underlying list, 'MyDLL<E>'.
+        return this.list.iterator();
     }
+    
 
     @Override
     public boolean equals(QueueADT<E> that) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'equals'");
+        // Compares this queue with another queue to check for equality. Two queues
+        // are considered equal if they have the same size and their elements are equal
+        // and in the same order. The method first checks basic conditions like null
+        // references and size differences, and then compares elements sequentially.
+    
+        // Check for same reference
+        if (this == that) return true;
+    
+        // Check for null and size mismatch
+        if (that == null || this.size() != that.size()) return false;
+    
+        // Create iterators for both queues
+        Iterator<E> thisIterator = this.iterator();
+        Iterator<E> thatIterator = that.iterator();
+    
+        // Iterate through both queues and compare each pair of elements
+        while (thisIterator.hasNext() && thatIterator.hasNext()) {
+            E thisElement = thisIterator.next();
+            E thatElement = thatIterator.next();
+    
+            // If one element is null and the other isn't, or if they are not equal, return false
+            if ((thisElement == null && thatElement != null) || (thisElement != null && !thisElement.equals(thatElement))) {
+                return false;
+            }
+        }
+    
+        // If all elements are equal and in the same order, return true
+        return true;
     }
-
+    
+    
     @Override
     public Object[] toArray() {
         // TODO Auto-generated method stub

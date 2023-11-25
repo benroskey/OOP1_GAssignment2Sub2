@@ -52,47 +52,116 @@ public class MyDLL<E> implements ListADT<E>, Iterator<E> {
         }
     }
 
+    private MyDLLNode<E> current = head; // Iterator state
+
     @Override
     public boolean hasNext() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hasNext'");
+        // Checks if there are more elements to iterate over in the list.
+        // 'current' points to the current node in the iteration. If it's not null, it means there are more elements.
+        return current != null;
     }
+    
 
     @Override
     public E next() throws NoSuchElementException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'next'");
+        // Retrieves the next element in the iteration and advances the iterator.
+        if (!hasNext()) {
+            throw new NoSuchElementException("No more elements in the list");
+        }
+        E element = current.getElement();
+        current = current.getNext();
+        return element;
     }
+    
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
+        // Counts the number of elements in the list.
+        int count = 0;
+        MyDLLNode<E> temp = head;
+        while (temp != null) {
+            count++;
+            temp = temp.getNext();
+        }
+        return count;
     }
+    
 
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'clear'");
+        // Clears the list by setting head and tail to null.
+        // This effectively removes all elements from the list.
+        head = tail = null;
     }
-
+    
     @Override
     public boolean add(int index, E toAdd) throws NullPointerException, IndexOutOfBoundsException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        if (toAdd == null) {
+            throw new NullPointerException("Cannot add null element");
+        }
+        if (index < 0 || index > size()) {
+            throw new IndexOutOfBoundsException("Index: " + index);
+        }
+    
+        MyDLLNode<E> newNode = new MyDLLNode<>(toAdd);
+    
+        if (index == 0) {
+            if (head == null) { // List is empty
+                head = tail = newNode;
+            } else { // Insert at the beginning
+                newNode.setNext(head);
+                head.setPrev(newNode);
+                head = newNode;
+            }
+        } else if (index == size()) { // Insert at the end
+            tail.setNext(newNode);
+            newNode.setPrev(tail);
+            tail = newNode;
+        } else { // Insert in the middle
+            MyDLLNode<E> current = head;
+            for (int i = 0; i < index - 1; i++) {
+                current = current.getNext();
+            }
+            newNode.setNext(current.getNext());
+            newNode.setPrev(current);
+            current.getNext().setPrev(newNode);
+            current.setNext(newNode);
+        }
+    
+        return true;
     }
+    
 
     @Override
     public boolean add(E toAdd) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'add'");
+        if (toAdd == null) {
+            throw new NullPointerException("Cannot add null element");
+        }
+        MyDLLNode<E> newNode = new MyDLLNode<>(toAdd);
+        if (head == null) { // List is empty
+            head = tail = newNode;
+        } else { // Add to the end
+            tail.setNext(newNode);
+            newNode.setPrev(tail);
+            tail = newNode;
+        }
+        return true;
     }
+    
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addAll'");
+        if (toAdd == null) {
+            throw new NullPointerException("Cannot add null list");
+        }
+        E[] elements = (E[]) toAdd.toArray(); // Convert to array
+        for (E element : elements) {
+            add(element); // Using the add(E toAdd) method for each element
+        }
+        return true;
     }
+    
 
     @Override
     public E get(int index) throws IndexOutOfBoundsException {
