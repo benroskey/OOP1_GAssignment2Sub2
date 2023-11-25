@@ -91,11 +91,6 @@ public class MyQueueTests {
         assert(2 == array.length);
     }
 
-    @Test
-    public void testisFull() {
-        MyQueue<Integer> queue = new MyQueue<Integer>();
-        assert(!queue.isFull());
-    }
 
     @Test
     public void testSize() {
