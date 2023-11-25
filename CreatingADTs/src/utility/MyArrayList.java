@@ -8,6 +8,17 @@ import adt.ListADT;
 public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
     private E[] data;
 
+    /**
+     * Constructs an empty list with an initial capacity of ten.
+     * 
+     * @param none
+     * @return none
+     * @throws none
+     * @postcondition none
+     * @precondition none
+     * @complexity O(1)
+     */
+    @SuppressWarnings("unchecked")
     public MyArrayList() {
         this.data = (E[]) new Object[0];
     }
@@ -35,13 +46,23 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'add'");
     }
-
+    
     @Override
     public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'addAll'");
     }
 
+    /**
+     * Returns the element at the specified position in this list.
+     * 
+     * @param index index of the element to return. 
+     * @return E the element at the specified position in this list.
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size())
+     * @precondition The list is not empty and the index is in the list.
+     * @postcondition none.
+     * @complexity O(n)
+     */
     @Override
     public E get(int index) throws IndexOutOfBoundsException {
         for (int i = 0; i < this.size(); i++) {
@@ -53,7 +74,18 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
         throw new IndexOutOfBoundsException();
     }
 
+    /**
+     * Removes the element at the specified position in this list.
+     * 
+     * @param index the index of the element to be removed.
+     * @return E the element previously at the specified position.
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size()).
+     * @precondition The list is not empty and the index is in the list.
+     * @postcondition The element is removed from the list and the size is decreased by 1.
+     * @complexity O(n)
+     */
     @Override
+    @SuppressWarnings("unchecked")
     public E remove(int index) throws IndexOutOfBoundsException {
         for (int i = 0; i < this.size(); i++) {
             if (i == index) {
@@ -74,7 +106,18 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
         throw new IndexOutOfBoundsException();
     }
 
+    /**
+     * Removes the first occurrence of the specified element from this list, if it is present.
+     * 
+     * @param toRemove element to be removed from this list, if present.
+     * @return E the element previously at the specified position.
+     * @throws NullPointerException if the specified element is null and this list does not permit null elements.
+     * @precondition The list is not empty and the element is in the list.
+     * @postcondition The element is removed from the list and the size is decreased by 1.
+     * @complexity O(n)
+     */
     @Override
+    @SuppressWarnings("unchecked")
     public E remove(E toRemove) throws NullPointerException {
         for (int i = 0; i < this.size(); i++) {
             if (this.data == toRemove) {
@@ -95,7 +138,19 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
         throw new NullPointerException();
     }
 
+    /**
+     * Replaces the element at the specified position in this list with the specified element.
+     * 
+     * @param index index of the element to replace.
+     * @param toChange element to be stored at the specified position.
+     * @return E the element previously at the specified position.
+     * @throws NullPointerException if the specified element is null and this list does not permit null elements.
+     * @throws IndexOutOfBoundsException if the index is out of range (index < 0 || index >= size()).
+     * @precondition The list is not empty and the index is in the list.
+     * @postcondition The element is replaced in the list and the size is unchanged.
+     */
     @Override
+    @SuppressWarnings("unchecked")
     public E set(int index, Object toChange) throws NullPointerException, IndexOutOfBoundsException {
         if (index < 0 || index >= this.size()) {
             throw new IndexOutOfBoundsException();
@@ -114,6 +169,15 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
         throw new IndexOutOfBoundsException();
     }
 
+    /**
+     * Returns true if this list contains no elements.
+     * 
+     * @return true if this list contains no elements, false otherwise.
+     * @throws none
+     * @precondition none
+     * @postcondition none
+     * @complexity O(1)
+     */
     @Override
     public boolean isEmpty() {
         if (this.size() == 0) {
@@ -130,7 +194,7 @@ public class MyArrayList<E> implements ListADT<E>, Iterator<E> {
     }
 
     @Override
-    public Object[] toArray(Object[] toHold) throws NullPointerException {
+    public E[] toArray(Object[] toHold) throws NullPointerException {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'toArray'");
     }
