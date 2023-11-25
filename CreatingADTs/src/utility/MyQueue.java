@@ -162,13 +162,16 @@ public class MyQueue<E> implements QueueADT<E>, Iterator<E> {
 
     @Override
     public boolean hasNext() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hasNext'");
+        return this.list.iterator().hasNext();
     }
 
     @Override
     public E next() throws NoSuchElementException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'next'");
+        if (this.hasNext()) {
+            return this.list.iterator().next();
+        }
+        else {
+            throw new NoSuchElementException();
+        }
     }
 }
