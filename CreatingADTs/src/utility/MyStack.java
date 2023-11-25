@@ -9,6 +9,16 @@ import adt.StackADT;
 public class MyStack<E> implements StackADT<E> {
     private MyArrayList<E> list;
 
+    /**
+     * Constructs an empty list with an initial capacity of ten.
+     * 
+     * @param none
+     * @return none
+     * @throws none
+     * @postcondition none
+     * @precondition none
+     * @complexity O(1)
+     */
     public MyStack() {
         this.list = new MyArrayList<E>();
     }
@@ -61,6 +71,18 @@ public class MyStack<E> implements StackADT<E> {
         throw new UnsupportedOperationException("Unimplemented method 'contains'");
     }
 
+    /**
+     * Returns the index of the first occurrence of the specified element in this
+     * 
+     * @param toFind element to search for.
+     * @return the index of the first occurrence of the specified element in this
+     *        list, or -1 if this list does not contain the element.
+     * @throws NullPointerException if the specified element is null and this list
+     *       does not permit null elements.
+     * @precondition none
+     * @postcondition none
+     * @complexity O(n)
+     */
     @Override
     public int search(E toFind) {
         for (int i = 0; i < this.list.size(); i++) {
@@ -71,6 +93,16 @@ public class MyStack<E> implements StackADT<E> {
         return -1;
     }
 
+    /**
+     * Returns an iterator over the elements in this list in proper sequence.
+     * 
+     * @param none
+     * @return an iterator over the elements in this list in proper sequence.
+     * @throws none
+     * @precondition none
+     * @postcondition none
+     * @complexity O(1)
+     */
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
@@ -98,6 +130,16 @@ public class MyStack<E> implements StackADT<E> {
         };
     }
 
+    /**
+     * Returns true if this list contains no elements.
+     * 
+     * @param none
+     * @return true if this list contains no elements, false otherwise.
+     * @throws none
+     * @precondition none
+     * @postcondition none
+     * @complexity O(1)
+     */
     @Override
     public boolean equals(StackADT<E> that) {
         if (this.size() != that.size()) {
@@ -116,6 +158,16 @@ public class MyStack<E> implements StackADT<E> {
         return true;
     }
 
+    /**
+     * Returns the number of elements in this list.
+     * 
+     * @param none
+     * @return the number of elements in this list.
+     * @throws none
+     * @precondition none
+     * @postcondition none
+     * @complexity O(1)
+     */
     @Override
     public int size() {
         return this.list.size();
